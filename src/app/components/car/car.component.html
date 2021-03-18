@@ -1,23 +1,29 @@
-<div *ngIf="dataLoaded==false" class="spinner-border text-info" role="status">
+<div class="spinner-border text-info" role="status">
     <span class="visually-hidden">Loading...</span>
   </div>
-<table *ngIf="dataLoaded==true" class="table">
-    <thead>
+<table class="table">
+    <thead class="thead-light">
         <tr>
             <th scope="col">Id</th>
-            <th>Brand</th>
-            <th>Car Model</th>
-            <th>Color</th>
-            <th>Model Year</th>
-            <th>Daily Price</th>
+            <th scope="col">Brand</th>
+            <th scope="col">Car Model</th>
+            <th scope="col">Model Year</th>
+            <th scope="col">Color</th>
+            <th scope="col">Daily Price</th>
         </tr>
     </thead>
-    <tr *ngFor="let car of cars">
-        <td>{{car.id}}</td>
-        <td>{{car.brandName}}</td>
-        <td>{{car.carModel}}</td>
-        <td>{{car.modelYear}}</td>
-        <td>{{car.colorName}}</td>
-        <td>{{car.dailyPrice}}</td>
-    </tr>
+    <tbody>
+        <tr *ngFor="let car of cars">
+            <td>{{car.id}}</td>
+            <td>{{car.brandName}}</td>
+            <td>{{car.carModel}}</td>
+            <td>{{car.modelYear}}</td>   
+            <td>{{car.colorName}}</td>   
+            <td>{{car.dailyPrice}}</td>
+        </tr>
+    </tbody>
+    <div style="position: relative; margin-right: 200;">
+        <button type="button" class="btn btn-info"
+        routerLink="/car/carDetails" style="text-align:center;">Car Details</button>       
+    </div>
 </table>

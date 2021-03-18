@@ -1,9 +1,10 @@
-<div *ngIf="dataLoaded==false" class="spinner-border text-info" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
-
-<ul *ngIf="dataLoaded==true" class="list-group">
-    <li *ngFor="let brand of brands"class="list-group-item">
+<!-- <span style="font-size:18px" class="badge bg-info text-dark">BRANDS</span> -->
+<h4><mark>BRANDS</mark></h4>
+<ul  class="list-group">
+    <li (click)="setCurrentBrand(brand)" 
+    routerLink="/cars/brands/{{brand.id}}"
+    *ngFor="let brand of brands"
+    [class]="getCurrentBrandClass(brand)">
         {{brand.brandName}}
     </li>
   </ul>

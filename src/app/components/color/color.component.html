@@ -1,9 +1,9 @@
-<div *ngIf="dataLoaded==false" class="spinner-border text-info" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
-
-<ul *ngIf="dataLoaded==true" class="list-group">
-    <li *ngFor="let color of colors"class="list-group-item">
+<span style="font-size:18px" class="badge bg-info text-dark">COLORS<span></span>
+<ul class="list-group">
+    <li (click)="setCurrentColor(color)" 
+    routerLink="/cars/colors/{{color.id}}"
+    *ngFor="let color of colors" 
+    [class]="getCurrentColorClass(color)">
         {{color.colorName}}
     </li>
-  </ul>
+</ul>
