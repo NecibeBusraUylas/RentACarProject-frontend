@@ -1,9 +1,6 @@
-<span style="font-size:18px" class="badge bg-info text-dark">COLORS<span></span>
-<ul class="list-group">
-    <li (click)="setCurrentColor(color)" 
-    routerLink="/cars/colors/{{color.id}}"
-    *ngFor="let color of colors" 
-    [class]="getCurrentColorClass(color)">
-        {{color.colorName}}
-    </li>
-</ul>
+<ul class="list-group" >
+  <h3 style="text-align:center">COLORS</h3>
+    <li [class]="getAllColorClass()" routerLink="/cars">All Colors</li>
+    <li (click)="setCurrentColor(color)" routerLink="/cars/color/{{color.id}}"
+      *ngFor="let color of colors" [class]="getCurrentColorClass(color)">{{color.colorName}}</li>
+  </ul>
