@@ -1,7 +1,69 @@
-<div *ngIf="dataLoaded==false" class="spinner-border text-info" role="status">
-    <span class="visually-hidden">Loading...</span>
+<button *ngIf="rentable" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button" class="btn btn-primary">Rent</button>
+<div style="margin-top: 10px;" *ngIf="!rentable" class="alert alert-danger">
+  This car is already rented!
+</div>
+
+<div *ngIf="car" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{car.colorName}} | {{car.brandName}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+      </div>
+      <div *ngIf="car" class="modal-body">
+        <div class="daily-price">
+          <div class="mb-3 row">
+            <div class="col-md-3">
+              <label for="daily-price" class="form-label">Daily Price:</label>
+            </div>
+            <div class="col-md-9">
+              <input [value]="car.dailyPrice | currency" disabled="disabled" type="text" class="form-control" id="daily-price" >
+            </div>
+          </div>
+        </div>
+        <div class="rent-date">
+          <div class="mb-3 row">
+            <div class="col-md-3">
+              <label for="rent-date" class="form-label">Rent Date :</label>
+            </div>
+            <div class="col-md-9">
+              <input (change)="onChangeEvent($event)" min="{{minDate}}" [(ngModel)]="rentDate" type="date" class="form-control" id="rent-date" placeholder="Bir gün seçiniz.">
+            </div>
+          </div>
+        </div>
+        <div class="return-date">
+          <div class="mb-3 row">
+            <div class="col-md-3">
+              <label for="return-date" class="form-label">Return Date :</label>
+            </div>
+            <div class="col-md-9">
+              <input disabled='{{!firstDateSelected}}' min="{{minDate}}" max="{{maxDate}}" [(ngModel)]="returnDate" type="date" class="form-control" id="return-date" placeholder="Bir gün seçiniz.">
+            </div>
+          </div>
+        </div>
+        <div class="customers">
+          <div class="row">
+            <div class="col-md-3">
+              Customers :
+            </div>
+            <div class="col-md-9">
+              <select #selectCustomer (change)="setCustomerId(selectCustomer.value)" class="form-select" aria-label="Default select example">
+                <option selected>Select a customer</option>
+                <option *ngFor="let customer of customers" [value]="customer.id">{{customer.companyName}}</option>
+              </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button *ngIf="rentable"  (click)="addRental()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Rent</button>
+      </div>
+    </div>
   </div>
-<table *ngIf="dataLoaded==true" class="table">
+</div>
+<!-- <table  class="table">
     <thead>
         <tr>
             <th scope="col">Id</th>
@@ -18,4 +80,4 @@
         <td>{{rental.rentDate}}</td>
         <td>{{rental.returnDate}}}</td>
     </tr>
-</table>
+</table> -->

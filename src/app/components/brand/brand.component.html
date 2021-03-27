@@ -1,6 +1,12 @@
-<ul class="list-group" >
-  <h3 style="text-align:center">BRANDS</h3>
-    <li [class]="getAllBrandClass()" routerLink="/cars">All Brands</li>
-    <li (click)="setCurrentBrand(brand)" routerLink="/cars/brand/{{brand.id}}"
-      *ngFor="let brand of brands" [class]="getCurrentBrandClass(brand)">{{brand.brandName}}</li>
-  </ul>
+<div class="mb-3 mt-4">
+  <label for="filterText" class="form-label">Brand Filter</label>
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="enter a brand to search">
+</div>
+
+<ul  class="list-group"><h3 style="text-align: center;">Brands</h3>
+  <li [class]="getAllBrandClass()" routerLink = "/cars">All Brands</li>
+  <li (click)="setCurrentBrand(brand)"
+  routerLink = "/cars/brand/{{brand.id}}"
+  *ngFor="let brand of brands | brandFilterPipe:filterText" 
+  [class]="getCurrentBrandClass(brand)">{{brand.brandName}}</li>
+</ul>

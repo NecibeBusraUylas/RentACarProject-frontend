@@ -1,0 +1,39 @@
+  <div class="mb-3 row">
+      <div class="col-md-4">
+          <label for="cardNumber" class="form-label">Card Number :</label>
+      </div>
+      <div class="col-md-8">
+          <input [(ngModel)]="cardNumber" type="text" class="form-control" id="cardNumber" placeholder="example: 1199771405797376">
+      </div>
+  </div>
+  <div class="mb-3 row">
+      <div class="col-md-4">
+          <label for="customerName" class="form-label">Name Surname : </label>
+      </div>
+      <div class="col-md-8">
+          <input [(ngModel)]="customerName" type="text" class="form-control" id="customerName" placeholder="example: Ali Doğan">
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-md-6">
+          <div class="mb-3">
+              <label for="cvv" class="form-label">Security Code : </label>
+              <input [(ngModel)]="securityCode" type="text" class="form-control" id="securityCode" placeholder="example: 123">
+          </div>
+      </div>
+      <div class="col-md-6">
+          <div class="mb-3">
+              <label for="expirationDate" class="form-label">Expiration Date : </label>
+              <input [(ngModel)]="expirationDate" type="text" class="form-control" id="expirationDate" placeholder="example: 06/22">
+          </div>   
+      </div>
+      <div class="mb-3 row">
+        <div class="col-md-4">
+            <label for="cardPassword" class="form-label">Card Password : </label>
+            <input [(ngModel)]="cardPassword" type="text" class="form-control" id="cardPassword" placeholder="example: 1234">
+        </div>
+    </div>
+  </div>
+  <div>
+      <button (click)="addPayment()" type="button" class="btn btn-primary">Ok</button>
+  </div>

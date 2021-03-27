@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Car } from 'src/app/models/car';
 import { CarImage } from 'src/app/models/carImage';
+import { Rental } from 'src/app/models/rental';
+import { CarDetailService } from 'src/app/services/car-detail.service';
 import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
+import { RentalService } from 'src/app/services/rental.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -14,6 +17,7 @@ import { environment } from 'src/environments/environment';
 export class CarDetailComponent implements OnInit {
 
   cars:Car[]=[];
+  rentals:Rental[]=[];
   carImages:CarImage[]=[];
   currentImage : CarImage;
   dataLoaded = false;
@@ -21,6 +25,8 @@ export class CarDetailComponent implements OnInit {
 
   constructor(
     private carService:CarService,
+    private carDetailService:CarDetailService,
+    private rentalService:RentalService,
     private activatedRoute:ActivatedRoute,
     private imageService:CarImageService,
   ) { }
@@ -29,10 +35,9 @@ export class CarDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       if(params["carId"]){
         this.getCarDetail(params["carId"]);
-        
+        this.getImagesByCarId(params["carId"])      
       }
-      this.getImagesByCarId();
-     
+      //this.getImagesByCarId();    
     });
   }
 
@@ -42,11 +47,15 @@ export class CarDetailComponent implements OnInit {
       this.dataLoaded = true;
     });
   }
-  getImagesByCarId(){
-    
-    this.imageService.getCarImages(this.activatedRoute.snapshot.params["carId"]).subscribe((response)=>{
-      this.carImages=response.data;      
-    });
+
+  getImagesByCarId(carId:number){
+    // this.imageService.getCarImages(this.activatedRoute.snapshot.params["carId"]).subscribe((response)=>{
+    //   this.carImages=response.data;      
+    // });
+    this.imageService.getCarImages(carId).subscribe(response => {
+      this.carImages=response.data;
+      this.dataLoaded=true;
+    })
   }
 
   getCurrentImageClass(image:CarImage){
@@ -64,5 +73,4 @@ export class CarDetailComponent implements OnInit {
       return ""
     }
   }
-
 }

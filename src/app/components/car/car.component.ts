@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Brand } from 'src/app/models/brand';
 import { Car } from 'src/app/models/car';
+import { CarImage } from 'src/app/models/carImage';
+import { Color } from 'src/app/models/color';
 import { CarService } from 'src/app/services/car.service';
 import { environment } from 'src/environments/environment';
 
@@ -12,12 +16,18 @@ import { environment } from 'src/environments/environment';
 export class CarComponent implements OnInit {
   
   cars:Car[] = [];
-  
-  dataLoaded = false;
-  imageBasePath = environment.baseUrl
+  brands : Brand[] = [];
+  colors: Color[] = [];
+  currentCar:Car;
+  filterText:string;
+  images:CarImage[]=[];
+
+  imageBasePath = environment.baseUrl;
 
 
-  constructor(private carService:CarService, private activatedRoute:ActivatedRoute) { }
+  constructor(private carService:CarService, 
+    private activatedRoute:ActivatedRoute,
+    private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params=>{
@@ -30,36 +40,37 @@ export class CarComponent implements OnInit {
       } else{
           this.getCars()
       }
-
     })
   } 
 
   getCars(){
      this.carService.getCars().subscribe(response=>{
-       this.cars=response.data
-       this.dataLoaded=true;
+       this.cars=response.data;
      })
   }
 
   getCarsByBrand(brandId:number){
     this.carService.getCarsByBrand(brandId).subscribe(response=>{
-      this.cars=response.data
-      this.dataLoaded=true;
+      this.cars=response.data;
     })
  }
 
  getCarsByColor(colorId:number){
   this.carService.getCarsByColor(colorId).subscribe(response=>{
-    this.cars=response.data
-    this.dataLoaded=true;
+    this.cars=response.data;
   })
+}
+
+setCurrentCar(car: Car) {
+  this.currentCar = car;
 }
 
 getCarsBySelect(brandId:number, colorId:number){
   this.carService.getCarsBySelect(brandId,colorId).subscribe(response=>{
-    this.cars=response.data
-    this.dataLoaded=true;
+    this.cars=response.data;
+    if(this.cars.length==0){
+      this.toastrService.warning("Car couldn't found!","Error");
+    }
   })
 }
-
 }

@@ -6,14 +6,12 @@
         <tr>
             <th scope="col">Id</th>
             <th scope="col">User</th>
-            <th scope="col">Email</th>
             <th scope="col">Company</th>
         </tr>
     </thead>
     <tr *ngFor="let customer of customers">
         <td>{{customer.id}}</td>
-        <td>{{customer.firstName + " " + customer.lastName}} </td>
-        <td>{{customer.email}}</td>
+        <td>{{customer.customerName}} </td>
         <td>{{customer.companyName}}</td>
     </tr>
 </table>
