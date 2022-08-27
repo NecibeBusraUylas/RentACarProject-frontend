@@ -1,6 +1,8 @@
 # RentCarProjectFrontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.3.
+## About The Project
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.3. You can have a look at my backend project from here => [RentCarProject](https://github.com/NecibeBusraUylas/RentCarProject)
 
 ## Development server
 
